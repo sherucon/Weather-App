@@ -1,7 +1,6 @@
 import requests           #imported for http requests
 import xml.etree.ElementTree as reader           #imported to parse xml
-from tkinter import *         #imports the whole tkinter module
-from tkinter import ttk       #imports ttk from tkinter
+from tkinter import Tk, StringVar, ttk, N, E, W, S, CENTER        #imports the necessary parts of tkinter module
 import API_KEY           #imports py file where api key is stored
 
 def getWeather(*args):             #defined getWeather() -- *args lets you bind the <Return> key to the func
@@ -10,6 +9,8 @@ def getWeather(*args):             #defined getWeather() -- *args lets you bind 
 
     if reqResponse.status_code==200:             #http request status is 200 when successful
         
+        status.set("Fetching Data...")
+
         xmlData=reader.fromstring(reqResponse.text)          #reading xml and storing as string in xmlData
 
         # print(xmlData.find("location/name").text)
@@ -48,7 +49,7 @@ mainframe.grid(column=0,row=0,sticky=(N,E,W,S))
 root.columnconfigure(0)
 root.rowconfigure(0)
 
-#city field with entry param
+#city field
 ttk.Label(mainframe, text="city", anchor=W, font=("Helvetica", 16)).grid(column=0,row=0,sticky=(W,E))
 ttk.Label(mainframe, text="   :   ", anchor=CENTER, font=("Helvetica", 16)).grid(column=1,row=0,sticky=(W,E))
 city=StringVar()
